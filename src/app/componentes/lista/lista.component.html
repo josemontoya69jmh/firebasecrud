@@ -1,10 +1,51 @@
-<p>lista works!</p>
-<ul >
-	<li *ngFor="let item of items">
+<p>lista </p>
 
-{{item.nombre}} -- {{item.id}}
+<div class="alert alert-warning" role="alert" *ngFor="let item of items">
 
-	</li>
+  {{item.nombre}} -- {{item.id}}
+  <div class="float-right ">
+
+    <a (click)="eliminar(item)">Eliminar </a>
 
 
-</ul>
+    <a (click)="editar(item)" data-toggle="modal" data-target="#examploModal">Editar </a>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="examploModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hola {{editarItem.nombre}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="agregarItemEditado()">
+          <input type="text" placeholder="Ingresa tu nombre" name="nombre" class="form-control"
+            [(ngModel)]="editarItem.nombre">
+
+          <input type="text" placeholder="Ingresa tu apellido" name="apellido" class="form-control"
+            [(ngModel)]="editarItem.apellido">
+
+          <input type="number" placeholder="Ingresa tu edad" name="edad" class="form-control"
+            [(ngModel)]="editarItem.edad">
+
+          <button class=" btn btn-warning mt-3" type="submit"> Editar </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+      </div>
+    </div>
+  </div>
+</div>

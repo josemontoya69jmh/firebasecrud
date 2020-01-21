@@ -8,17 +8,35 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class ListaComponent implements OnInit {
   items: any;
+  editarItem: any = {
+    name: '',
+    apellido: '',
+    edad: ''
+  }
+
 
   constructor(private conexion: ConexionService) {
-   this.conexion.listaitem().subscribe( item => {
+    this.conexion.listaitem().subscribe(item => {
 
-    this.items = item;
-    console.log(this.items);
-   });
+      this.items = item;
+      console.log(this.items);
+    });
 
-   }
+  }
 
   ngOnInit() {
   }
 
+  eliminar(item) {
+    this.conexion.eliminaritem(item);
+  }
+
+  editar(item) {
+    this.editarItem = item;
+  }
+
+
+  agregarItemEditado() {
+    this.conexion.editaritem(this.editarItem)
+  }
 }

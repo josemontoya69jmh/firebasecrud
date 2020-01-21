@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 // Agregamos map y el interface
 import { map } from 'rxjs/operators';
@@ -12,8 +12,9 @@ export interface Item { nombre: string; apellido: string; edad: number; id: stri
 export class ConexionService {
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<Item[]>;
-
-  constructor( afs: AngularFirestore) {
+  // esta variable es para poder manipular los documentos y es gracias AngularFirestoreDocument
+  itemDoc: AngularFirestoreDocument<Item>;
+  constructor(private afs: AngularFirestore) {
     // items es como se llama nuestra colleccion de firebase
     // Item es como se llama la variable que hemos echo en el interface
     // items tambien se llama la variable que hemos creado para luego pinta el html.
@@ -37,5 +38,16 @@ export class ConexionService {
   listaitem() {
     return this.items;
   }
+  eliminaritem(item) {
+
+    this.itemDoc = this.afs.doc<Item>(`items/${item.id}`);
+    this.itemDoc.delete();
+  }
+  editaritem(item) {
+
+    this.itemDoc = this.afs.doc<Item>(`items/${item.id}`);
+    this.itemDoc.update(item);
+  }
+
 
 }

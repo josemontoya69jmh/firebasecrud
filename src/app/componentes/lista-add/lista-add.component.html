@@ -1,0 +1,22 @@
+<p>lista-add works!</p>
+<form  (submit)="agreagar()">
+<input
+ type="text" placeholder="Ingresa tu nombre"
+ name="nombre" class="form-control"
+ [(ngModel)]="item.nombre"
+ >
+
+ <input
+ type="text" placeholder="Ingresa tu apellido"
+ name="apellido" class="form-control"
+ [(ngModel)]="item.apellido"
+ >
+
+ <input
+ type="number" placeholder="Ingresa tu edad"
+ name="edad" class="form-control"
+ [(ngModel)]="item.edad"
+ >
+
+<button class=" btn btn-warning mt-3" type="submit"> agregar </button>
+</form>
